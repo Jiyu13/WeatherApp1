@@ -2,8 +2,10 @@ import React from "react";
 import {ImageBackground, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View} from "react-native";
 import {Feather} from "@expo/vector-icons";
 import IconText from "../components/IconText";
+import moment from "moment";
 
-const City = () => {
+const City = ({cityData}) => {
+    const {name, country, population, sunrise, sunset} = cityData
     // destructure styles
     const {
         container, imageLayout, cityName, cityText, countryName,
@@ -16,33 +18,27 @@ const City = () => {
                 source={require("../../assets/city-background.jpg")}
                 style={imageLayout}
             >
-                <Text style={[cityName, cityText]}>London</Text>
-                <Text style={[countryName, cityText]}>UK</Text>
+                <Text style={[cityName, cityText]}>{name}</Text>
+                <Text style={[countryName, cityText]}>{country}</Text>
                 <View style={[populationWrapper, rowLayout]}>
-                    {/*<Feather name={"user"} size={50} color={"red"} />*/}
-                    {/*<Text style={styles.populationText}>8000</Text>*/}
                     <IconText
                         iconName={'user'}
                         iconColor={"red"}
-                        bodyText={"8000"}
+                        bodyText={`Population: ${population}`}
                         bodyTextStyles={populationText}
                     />
                 </View>
                 <View style={[riseSetWrapper, rowLayout]}>
-                    {/*<Feather name={"sunrise"} size={50} color={"white"} />*/}
-                    {/*<Text style={styles.riseSetText}>10:46:58am</Text>*/}
                     <IconText
                         iconName={"sunrise"}
                         iconColor={"white"}
-                        bodyText={"10:46:58am"}
+                        bodyText={moment(sunrise).format("h:mm:ss a")}
                         bodyTextStyles={riseSetText}
                     />
-                    {/*<Feather name={"sunset"} size={50} color={"white"} />*/}
-                    {/*<Text style={styles.riseSetText}>17:28:15pm</Text>*/}
                     <IconText
                         iconName={"sunset"}
                         iconColor={"white"}
-                        bodyText={"17:28:15pm"}
+                        bodyText={moment(sunset).format("h:mm:ss a")}
                         bodyTextStyles={riseSetText}
                     />
                 </View>
